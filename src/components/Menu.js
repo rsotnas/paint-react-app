@@ -1,7 +1,7 @@
 import React from "react";
 import '../App.css';
 
-const Menu = ({ setLineColor, setLineWidth, setLineOpacity }) => {
+const Menu = ({ setLineColor, setLineWidth, setLineOpacity, setBackgroundColor }) => {
 
   return (
     <div className="Menu">
@@ -30,12 +30,23 @@ const Menu = ({ setLineColor, setLineWidth, setLineOpacity }) => {
           setLineOpacity(e.target.value / 100);
         }}
       />
+      <label>Background Color</label>
+      <input
+        type='color'
+        onChange={(e) => {
+          setBackgroundColor(e.target.value);
+        }}
+      />
       {/* TODO
 
         ERASER
         CLEAN THE BOARD
         PUT/HIDE GRID
-        DRAW GEOMETRIC SYMBOLS
+        DRAW GEOMETRIC SYMBOLS (CIRCLE, SQUARE, TRIANGLE)
+        WRITE
+        ICON FOR EACH TOOL
+        DOWNLOAD IMAGE
+
       */}
     </div>
   )

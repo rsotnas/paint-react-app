@@ -10,6 +10,7 @@ function App() {
   const [isDrawing, setIsDrawing] = useState(false);
   const [lineWidth, setLineWidth] = useState(5);
   const [lineColor, setLineColor] = useState('black');
+  const [backgroundColor, setBackgroundColor] = useState('white');
   const [lineOpacity, setLineOpacity] = useState(0.1);
 
   useEffect(() => {
@@ -21,7 +22,19 @@ function App() {
     ctx.strokeStyle = lineColor;
     ctx.lineWidth = lineWidth;
     ctxRef.current = ctx;
-  }, [lineColor, lineOpacity, lineWidth]);
+  }, [lineColor, lineOpacity, lineWidth,])
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    const ctx = canvas.getContext('2d');
+    ctx.globalAlpha = 1;
+    ctx.fillStyle = backgroundColor;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.save();
+    ctx.globalAlpha = lineOpacity;
+    ctxRef.current = ctx;
+    // eslint-disable-next-line
+  }, [backgroundColor]);
 
   const startDrawing = (e) => {
     ctxRef.current.beginPath();
@@ -59,6 +72,7 @@ function App() {
           setLineColor={setLineColor}
           setLineWidth={setLineWidth}
           setLineOpacity={setLineOpacity}
+          setBackgroundColor={setBackgroundColor}
         />
 
         <canvas
