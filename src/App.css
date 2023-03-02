@@ -20,8 +20,10 @@ h1 {
   width: 1280px;
   height: calc(720px + 50px + 10px);
   border: 2px solid #808080;
-  position: relative;
+  position: absolute;
   background-color: white;
+  top: 15%;
+  /* left: 50%; */
 }
 
 .Menu {
@@ -34,4 +36,12 @@ h1 {
   background-color: #a3a3a32d;
   margin: auto;
   margin-top: 10px;
+}
+
+canvas {
+  position: absolute;
+  top: '70px';
+  left: 0;
+  width: 100%;
+  height: calc(100% - 60px);
 }

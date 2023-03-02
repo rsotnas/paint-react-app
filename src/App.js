@@ -6,6 +6,9 @@ import './App.css';
 function App() {
   const canvasRef = useRef(null);
   const ctxRef = useRef(null);
+  const canvasBackgroundRef = useRef(null);
+  const ctxBackgroundRef = useRef(null);
+
 
   const [isDrawing, setIsDrawing] = useState(false);
   const [lineWidth, setLineWidth] = useState(5);
@@ -25,18 +28,19 @@ function App() {
   }, [lineColor, lineOpacity, lineWidth,])
 
   useEffect(() => {
-    const canvas = canvasRef.current;
+    const canvas = canvasBackgroundRef.current;
     const ctx = canvas.getContext('2d');
     ctx.globalAlpha = 1;
     ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.save();
     ctx.globalAlpha = lineOpacity;
-    ctxRef.current = ctx;
+    ctxBackgroundRef.current = ctx;
     // eslint-disable-next-line
   }, [backgroundColor]);
 
   const startDrawing = (e) => {
+    console.log('oxe')
     ctxRef.current.beginPath();
     ctxRef.current.moveTo(
       e.nativeEvent.offsetX,
@@ -74,7 +78,11 @@ function App() {
           setLineOpacity={setLineOpacity}
           setBackgroundColor={setBackgroundColor}
         />
-
+        <canvas
+          ref={canvasBackgroundRef}
+          width={'1280px'}
+          height={'720px'}
+        />
         <canvas
           onMouseDown={startDrawing}
           onMouseUp={endDrawing}
