@@ -9,19 +9,28 @@ const Menu = ({
   , reset
   , tool
   , setTool
+  , setGrid
 }) => {
 
   return (
     <div className="Menu">
-      <label class="tooltip">Grid</label>
-      <div class="btn-plus">
-        <ul>
-          <li><a href="#about">No Grid</a></li>
-          <li><a href="#blog">2x2</a></li>
-          <li><a href="#projects">3x3</a></li>
-          <li><a href="#contact">4x4</a></li>
-        </ul>
-      </div>
+      <ul>
+        <li>
+          <a href="#" onClick={() => setGrid(0)}>
+            No Grid
+          </a>
+        </li>
+        <li>
+          <a href="#" onClick={() => setGrid(2)}>
+            2x2
+          </a>
+        </li>
+        <li>
+          <a href="#" onClick={() => setGrid(3)}>
+            3x3
+          </a>
+        </li>
+      </ul>
       <input
         type="radio"
         id="pencil"
@@ -90,7 +99,7 @@ const Menu = ({
         DOWNLOAD IMAGE
 
       */}
-    </div>
+    </div >
   )
 }
 

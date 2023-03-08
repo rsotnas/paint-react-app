@@ -19,6 +19,7 @@ function App() {
   const [backgroundColor, setBackgroundColor] = useState(DEFAULT_BACKGROUND_COLOR);
   const [lineOpacity, setLineOpacity] = useState(0.1);
   const [tool, setTool] = useState('pencil');
+  const [grid, setGrid] = useState(0);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -42,6 +43,43 @@ function App() {
     ctxBackgroundRef.current = ctx;
     // eslint-disable-next-line
   }, [backgroundColor]);
+
+  useEffect(() => {
+    const canvas = canvasGridRef.current;
+    const ctx = canvas.getContext('2d');
+    console.log({ grid })
+    if (grid) {
+      if (ctxGridRef?.current) {
+        ctxGridRef.current.clearRect(0, 0, canvas.width, canvas.height);
+      }
+
+      let counter = 1;
+      let size = canvas.width / grid;
+      let height = canvas.height / grid;
+      console.log({ size, height })
+      while (counter < grid) {
+
+        ctx.beginPath();
+        ctx.moveTo(size * counter, 0);
+        ctx.lineTo(size * counter, canvas.height);
+        ctx.stroke();
+
+        ctx.beginPath();
+        ctx.moveTo(0, counter * height);
+        ctx.lineTo(canvas.width, height * counter);
+        ctx.stroke();
+
+        counter += 1;
+      }
+
+      ctxGridRef.current = ctx;
+    }
+    else {
+      if (ctxGridRef?.current) {
+        ctxGridRef.current.clearRect(0, 0, canvas.width, canvas.height);
+      }
+    }
+  }, [grid])
 
   const startDrawing = (e) => {
     ctxRef.current.beginPath();
@@ -101,6 +139,7 @@ function App() {
           reset={reset}
           setTool={setTool}
           tool={tool}
+          setGrid={setGrid}
         />
         <canvas
           ref={canvasBackgroundRef}

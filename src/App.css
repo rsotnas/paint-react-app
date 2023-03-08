@@ -195,10 +195,6 @@ canvas {
   height: calc(100% - 60px);
 }
 
-.btn-plus {
-  display: none;
-}
-
 .tooltip {
   width: 50px;
   border: black solid;
