@@ -47,7 +47,6 @@ function App() {
   useEffect(() => {
     const canvas = canvasGridRef.current;
     const ctx = canvas.getContext('2d');
-    console.log({ grid })
     if (grid) {
       if (ctxGridRef?.current) {
         ctxGridRef.current.clearRect(0, 0, canvas.width, canvas.height);
@@ -56,7 +55,6 @@ function App() {
       let counter = 1;
       let size = canvas.width / grid;
       let height = canvas.height / grid;
-      console.log({ size, height })
       while (counter < grid) {
 
         ctx.beginPath();
@@ -124,6 +122,33 @@ function App() {
     ctxRef.current.clearRect(0, 0, canvas.width, canvas.height);
   }
 
+  const download = () => {
+    let allCanvas = document.createElement('canvas');
+    allCanvas.width = 1280;
+    allCanvas.height = 720;
+    let allCanvasctx = allCanvas.getContext('2d');
+    allCanvasctx.fillStyle = 'red';
+    allCanvasctx.fillRect(0, 0, allCanvas.width, allCanvas.height);
+
+    let _background = canvasBackgroundRef.current.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+    let _grid = canvasGridRef.current.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+    let _drawing = canvasRef.current.toDataURL("image/png").replace("image/png", "image/octet-stream");
+
+    allCanvasctx.drawImage(_background, allCanvas.width, allCanvas.height);
+    allCanvasctx.drawImage(_grid, allCanvas.width, allCanvas.height);
+    allCanvasctx.drawImage(_drawing, allCanvas.width, allCanvas.height);
+    console.log({ allCanvas })
+    const link = document.createElement("a");
+    link.download = 'paint.png';
+    const image = allCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
+
+    link.href = image;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
 
 
 
@@ -140,6 +165,7 @@ function App() {
           setTool={setTool}
           tool={tool}
           setGrid={setGrid}
+          download={download}
         />
         <canvas
           ref={canvasBackgroundRef}

@@ -10,6 +10,7 @@ const Menu = ({
   , tool
   , setTool
   , setGrid
+  , download
 }) => {
 
   return (
@@ -89,6 +90,11 @@ const Menu = ({
         type='button'
         value='Reset'
         onClick={reset}
+      />
+      <input
+        type='button'
+        value='Download'
+        onClick={download}
       />
       {/* TODO
 
