@@ -17,19 +17,19 @@ const Menu = ({
     <div className="Menu">
       <ul>
         <li>
-          <a href="#" onClick={() => setGrid(0)}>
+          <button className='button' onClick={() => setGrid(0)}>
             No Grid
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#" onClick={() => setGrid(2)}>
+          <button className='button' onClick={() => setGrid(2)}>
             2x2
-          </a>
+          </button>
         </li>
         <li>
-          <a href="#" onClick={() => setGrid(3)}>
+          <button className='button' onClick={() => setGrid(3)}>
             3x3
-          </a>
+          </button>
         </li>
       </ul>
       <input
@@ -37,23 +37,24 @@ const Menu = ({
         id="pencil"
         name="drawing"
         value="pencil"
-        checked={tool === 'pencil' ? true : false}
+        // checked={tool === 'pencil' ? true : false}
+        defaultChecked
         onClick={(e) => {
           setTool(e.target.value);
         }}
       />
-      <label for="pencil">Pencil</label>
+      <label htmlFor="pencil">Pencil</label>
       <input
         type="radio"
         id="eraser"
         name="drawing"
         value="eraser"
-        checked={tool === 'eraser' ? true : false}
+        // checked={tool === 'eraser' ? true : false}
         onClick={(e) => {
           setTool(e.target.value);
         }}
       />
-      <label for="eraser">Eraser</label>
+      <label htmlFor="eraser">Eraser</label>
       <label>Brush Color</label>
       <input
         type='color'

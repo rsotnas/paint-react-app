@@ -6,7 +6,7 @@ A project to exercise with canvas.
 | Feature                           | Status |
 |-----------------------------------|--------|
 | put/hide grid                     |   done                   |
+| download image                    |   done     |
 | write stuff                       |        |
-| download image                    |        |
 
 

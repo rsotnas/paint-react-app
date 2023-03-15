@@ -127,24 +127,13 @@ function App() {
     allCanvas.width = 1280;
     allCanvas.height = 720;
     let allCanvasctx = allCanvas.getContext('2d');
-    allCanvasctx.fillStyle = 'red';
-    allCanvasctx.fillRect(0, 0, allCanvas.width, allCanvas.height);
-
-    let _background = canvasBackgroundRef.current.toDataURL("image/png").replace("image/png", "image/octet-stream");
-
-    let _grid = canvasGridRef.current.toDataURL("image/png").replace("image/png", "image/octet-stream");
-
-    let _drawing = canvasRef.current.toDataURL("image/png").replace("image/png", "image/octet-stream");
-
-    allCanvasctx.drawImage(_background, allCanvas.width, allCanvas.height);
-    allCanvasctx.drawImage(_grid, allCanvas.width, allCanvas.height);
-    allCanvasctx.drawImage(_drawing, allCanvas.width, allCanvas.height);
-    console.log({ allCanvas })
-    const link = document.createElement("a");
+    allCanvasctx.drawImage(canvasBackgroundRef.current, 0, 0);
+    allCanvasctx.drawImage(canvasGridRef.current, 0, 0);
+    allCanvasctx.drawImage(canvasRef.current, 0, 0);
+    var link = document.createElement('a');
     link.download = 'paint.png';
-    const image = allCanvas.toDataURL("image/png").replace("image/png", "image/octet-stream");  // here is the most important part because if you dont replace you will get a DOM 18 exception.
 
-    link.href = image;
+    link.href = allCanvas.toDataURL();
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -171,11 +160,13 @@ function App() {
           ref={canvasBackgroundRef}
           width={'1280px'}
           height={'720px'}
+          id='backgroundCanvas'
         />
         <canvas
           ref={canvasGridRef}
           width={'1280px'}
           height={'720px'}
+          id='gridCanvas'
         />
         <canvas
           onMouseDown={startDrawing}
@@ -184,6 +175,7 @@ function App() {
           ref={canvasRef}
           width={'1280px'}
           height={'720px'}
+          id='drawingCanvas'
         />
       </div>
       <h2>by Sotnas</h2>
